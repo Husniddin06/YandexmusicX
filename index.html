@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎧 VKMUSICX PREMIUM MAX MUSIQA</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+        body {background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;height:100vh;overflow:hidden;}
+        .header {text-align:center;padding:20px;background:rgba(0,0,0,0.3);font-size:24px;font-weight:900;text-shadow:0 0 10px #fff;}
+        .search-box {padding:20px;text-align:center;}
+        input[type="text"] {width:80%;padding:15px;border:none;border-radius:25px;font-size:16px;box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+        .premium-section {padding:20px;text-align:center;}
+        .premium-btn {display:block;margin:10px auto;padding:15px 30px;background:linear-gradient(45deg,#ff6b6b,#ffd93d);border:none;border-radius:50px;font-size:18px;font-weight:700;cursor:pointer;box-shadow:0 10px 20px rgba(255,107,107,0.4);}
+        .status {text-align:center;padding:10px;font-size:14px;color:#ffd93d;}
+        .music-list {max-height:300px;overflow-y:auto;padding:10px;}
+        .track {display:flex;align-items:center;padding:10px;margin:5px 0;background:rgba(255,255,255,0.1);border-radius:15px;cursor:pointer;}
+    </style>
+</head>
+<body>
+    <div class="header">🎵 VKMUSICXBOT PREMIUM MAX MUSIQA</div>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Qo'shiq nomi kiriting... (Miyagi - Minor)">
+        <button onclick="searchMusic()" style="margin-top:10px;padding:10px 20px;background:#4ecdc4;border:none;border-radius:20px;font-weight:700;">🔍 Qidirish</button>
+    </div>
+    <div class="premium-section">
+        <div id="userStatus" class="status">Status: Tekshirilmoqda...</div>
+        <button class="premium-btn" onclick="buyPremium('1oy')">👑 1 Oy Premium - 100⭐</button>
+        <button class="premium-btn" onclick="buyPremium('3oy')">👑 3 Oy Premium - 250⭐</button>
+        <button class="premium-btn" onclick="buyPremium('6oy')">👑 6 Oy Premium - 350⭐</button>
+    </div>
+
+    <script>
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+        document.getElementById('userStatus').innerText = 'Status: Free (1 ta audio)';
+
+        function searchMusic() {
+            const query = document.getElementById('searchInput').value;
+            if (!query) return alert('Qidiruv matnini kiriting!');
+            Telegram.WebApp.sendData(JSON.stringify({type: 'search', query: query}));
+        }
+
+        function buyPremium(period) {
+            const prices = { '1oy': 100, '3oy': 250, '6oy': 350 };
+            Telegram.WebApp.sendData(JSON.stringify({type: 'premium', period: period, stars: prices[period]}));
+        }
+    </script>
+</body>
+</html>
